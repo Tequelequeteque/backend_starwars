@@ -1,3 +1,6 @@
-import { log } from 'console';
+import 'dotenv/config';
+import express from 'express';
 
-log('Hello World');
+const api = express();
+
+export { api as default };
