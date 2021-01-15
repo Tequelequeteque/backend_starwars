@@ -1,3 +1,3 @@
-import { log } from "console";
+import { log } from 'console';
 
 log('Hello World');
