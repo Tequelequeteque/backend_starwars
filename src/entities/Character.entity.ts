@@ -5,14 +5,11 @@ export default class Character {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'varchar', length: 255 })
   name: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'smallint' })
   age: number;
-
-  @Column()
-  info: string;
 
   @Column({ default: false })
   infoHasBeenUpdated: boolean;

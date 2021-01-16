@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import Character from '../../../entities/Character.entity';
 
-export default class GetAllCharacters {
+export default class GetAllCharactersService {
   constructor(private characterRepository: Repository<Character>) {}
 
   public execute = async (): Promise<Character[]> =>

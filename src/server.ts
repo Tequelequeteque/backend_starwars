@@ -1,8 +1,9 @@
 import getApi from './api';
 
 (async () => {
-  const SERVER_PORT = Number(process.env.SERVER_PORT);
   const api = await getApi();
+  const SERVER_PORT = Number(process.env.SERVER_PORT);
   api.listen(SERVER_PORT);
-  console.log(`API running on port ${SERVER_PORT}`);
+  // eslint-disable-next-line no-console
+  console.info(`API running on port ${SERVER_PORT}`);
 })();
