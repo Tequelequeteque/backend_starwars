@@ -13,11 +13,8 @@ const dbConfig = {
   password: String(DB_PASS),
   database: String(DB_NAME),
   synchronize: true,
-  entities: [`${entitiesDir}/**/*.ts`],
-  cli: {
-    entitiesDir,
-  },
-  dropSchema: true,
+  entities: [`${entitiesDir}/**/*.entity.ts`],
+  cli: { entitiesDir },
 } as PostgresConnectionOptions;
 
 export { dbConfig as default };

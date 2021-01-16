@@ -5,15 +5,15 @@ export default class Character {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: false })
   name: string;
 
-  @Column()
+  @Column({ nullable: false })
   age: number;
 
   @Column()
   info: string;
 
-  @Column()
+  @Column({ default: false })
   infoHasBeenUpdated: boolean;
 }
