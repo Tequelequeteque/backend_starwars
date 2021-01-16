@@ -2,6 +2,7 @@ version: '3'
 
 services:
   db: 
+    restart: always
     container_name: 'db_sw'
     image: 'postgres:alpine'
     env_file: .env
@@ -11,3 +12,19 @@ services:
       POSTGRES_PASSWORD: ${DB_PASS}
     ports:
       - ${DB_PORT}:5432
+    
+
+  server:
+    restart: always
+    container_name: 'server_sw'
+    env_file: .env
+    depends_on: 
+      - "db"
+    volumes:
+      - .:/var/project
+    build: 
+      context: .
+      args:
+        PORT: ${SERVER_PORT}
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}

@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
-import CreateCharacterService from './services/CreateCharacters.service';
-import GetAllCharactersService from './services/GetAllCharacters.service';
-import CreateCharacterValidation from './validations/CreateCharacter.validation';
+import StoreService from './services/store.service';
+import IndexService from './services/index.service';
+import StoreValidator from './validators/store.validator';
 
 export default class CharacterController {
   constructor(
-    private getAllService: GetAllCharactersService,
-    private createCharacterValidation: CreateCharacterValidation,
-    private createCharacterService: CreateCharacterService,
+    private indexService: IndexService,
+    private storeValidator: StoreValidator,
+    private storeService: StoreService,
   ) {}
 
   public index = async (
     _request: Request,
     response: Response,
   ): Promise<Response> => {
-    const characters = await this.getAllService.execute();
+    const characters = await this.indexService.execute();
     return response.json(characters);
   };
 
@@ -22,8 +22,8 @@ export default class CharacterController {
     request: Request,
     response: Response,
   ): Promise<Response> => {
-    const dto = await this.createCharacterValidation.execute(request.body);
-    const newCharacter = await this.createCharacterService.execute(dto);
+    const dto = await this.storeValidator.execute(request.body);
+    const newCharacter = await this.storeService.execute(dto);
     return response.status(201).json(newCharacter);
   };
 }

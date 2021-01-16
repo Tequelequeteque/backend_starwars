@@ -1,10 +1,9 @@
 import { Repository } from 'typeorm';
 import Character from '../../../entities/Character.entity';
 
-export default class CreateCharacterService {
+export default class IndexService {
   constructor(private characterRepository: Repository<Character>) {}
 
-  public execute = (data: Character): Promise<Character> => {
-    return this.characterRepository.save(data);
-  };
+  public execute = async (): Promise<Character[]> =>
+    this.characterRepository.find();
 }

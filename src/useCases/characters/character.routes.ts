@@ -2,34 +2,30 @@ import { Router } from 'express';
 import { getRepository } from 'typeorm';
 import Character from '../../entities/Character.entity';
 import CharacterController from './character.controller';
-import CreateCharacterService from './services/CreateCharacters.service';
-import GetAllCharactersService from './services/GetAllCharacters.service';
-import CreateCharacterValidation from './validations/CreateCharacter.validation';
+import StoreService from './services/store.service';
+import IndexService from './services/index.service';
+import StoreValidator from './validators/store.validator';
 
-const getCharactersRoutes = async (): Promise<Router> => {
-  const charactersRoutes = Router();
+const getCharacterRoutes = async (): Promise<Router> => {
+  const characterRoutes = Router();
 
   const characterRepository = getRepository(Character);
 
-  const getAllCharacters = new GetAllCharactersService(characterRepository);
+  const indexService = new IndexService(characterRepository);
 
-  const createCharacterValidation = new CreateCharacterValidation(
-    characterRepository,
-  );
-  const createCharacterService = new CreateCharacterService(
-    characterRepository,
-  );
+  const storeValidator = new StoreValidator(characterRepository);
+  const storeService = new StoreService(characterRepository);
 
   const characterController = new CharacterController(
-    getAllCharacters,
-    createCharacterValidation,
-    createCharacterService,
+    indexService,
+    storeValidator,
+    storeService,
   );
 
-  charactersRoutes.get('/characters', characterController.index);
-  charactersRoutes.post('/characters', characterController.store);
+  characterRoutes.get('/characters', characterController.index);
+  characterRoutes.post('/characters', characterController.store);
 
-  return charactersRoutes;
+  return characterRoutes;
 };
 
-export { getCharactersRoutes as default };
+export { getCharacterRoutes as default };
