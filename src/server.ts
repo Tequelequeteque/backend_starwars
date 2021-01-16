@@ -1,5 +1,8 @@
-import api from './api';
+import getApi from './api';
 
-const PORT = Number(process.env.PORT);
-
-api.listen(PORT);
+(async () => {
+  const SERVER_PORT = Number(process.env.SERVER_PORT);
+  const api = await getApi();
+  api.listen(SERVER_PORT);
+  console.log(`API running on port ${SERVER_PORT}`);
+})();
