@@ -5,4 +5,5 @@ ENV PORT $PORT
 EXPOSE $PORT
 
 ADD . .
+RUN yarn
 CMD yarn dev

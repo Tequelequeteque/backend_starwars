@@ -13,8 +13,6 @@ import FindValidator from './validators/find.validator';
 import FindService from './services/find.service';
 
 const getCharacterRoutes = async (): Promise<Router> => {
-  const characterRoutes = Router();
-
   const characterRepository = getRepository(Character);
 
   const indexService = new IndexService(characterRepository);
@@ -42,6 +40,8 @@ const getCharacterRoutes = async (): Promise<Router> => {
     findValidator,
     findService,
   );
+
+  const characterRoutes = Router();
 
   characterRoutes.get('/characters', characterController.index);
   characterRoutes.post('/characters', characterController.store);
