@@ -33,5 +33,6 @@ export default class Character {
       uuid: this.uuid,
       name: this.name,
       age: this.age,
+      hasBeenUpdate: this.hasBeenUpdate,
     } as ICharacterResponse);
 }
